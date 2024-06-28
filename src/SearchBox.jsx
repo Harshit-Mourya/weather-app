@@ -3,7 +3,7 @@ import search_icon from "./assets/search.png";
 import "./SearchBox.css";
 
 export default function SearchBox() {
-  const apiKey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+  const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
   const API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
   let [city, setCity] = useState("");
