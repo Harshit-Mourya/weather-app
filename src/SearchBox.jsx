@@ -3,7 +3,7 @@ import search_icon from "./assets/search.png";
 import "./SearchBox.css";
 
 export default function SearchBox() {
-  const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
+  const API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
   const API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
   let [city, setCity] = useState("");
@@ -15,6 +15,32 @@ export default function SearchBox() {
     console.log(city);
     setCity(city);
   };
+
+  let getWeatherInfo = async () => {
+    try {
+      const response = await fetch(
+        `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`
+      );
+      if (!response.ok) {
+        throw new Error(
+          "Failed to fetch weather data. Please try again later."
+        );
+      }
+
+      let jsonResponse = await response.json();
+      let info = {
+        city: city,
+        temp: jsonResponse.main.temp,
+        humidity: jsonResponse.main.humidity,
+        weather: jsonResponse.weather[0].main,
+        windSpeed: jsonResponse.wind.speed,
+      };
+      return info;
+    } catch (err) {
+      throw err;
+    }
+  };
+
   return (
     <div className="SearchBox">
       <form onSubmit={handleSubmit}>
