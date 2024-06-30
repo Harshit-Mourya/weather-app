@@ -6,6 +6,7 @@ import "./Weather.css";
 export default function Weather() {
   const [weatherInfo, setWeatherInfo] = useState({
     city: "Delhi",
+    location: "Delhi",
     temp: 32.05,
     humidity: 74,
     weather: "Haze",
@@ -18,9 +19,10 @@ export default function Weather() {
 
   return (
     <div className="Weather">
-      <h1>Weather In Your City</h1>
-      <SearchBox updateInfo={updateInfo} />
-      <Info info={weatherInfo} />
+      <div className="box">
+        <SearchBox updateInfo={updateInfo} />
+        <Info info={weatherInfo} />
+      </div>
     </div>
   );
 }

@@ -3,5 +3,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-image: linear-gradient(45deg, #c4baff, #b496ff);
+}
+
+.box {
+  max-width: 400px;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 2rem;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.5);
+
+  background-image: linear-gradient(to bottom, #6647ff, #1f2fe1);
+}
+
+@media screen and (max-width: 500px) and (max-height: 1000px) {
+  .box {
+    height: 60%;
+  }
+}
+@media screen and (max-width: 500px) and (max-height: 700px) {
+  .box {
+    height: 90%;
+  }
+}
+@media screen and (max-width: 500px) and (max-height: 800px) {
+  .box {
+    height: 80%;
+  }
 }

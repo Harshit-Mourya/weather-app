@@ -8,7 +8,6 @@ export default function SearchBox({ updateInfo }) {
 
   let [city, setCity] = useState("");
   let [error, setError] = useState(false);
-  let [loading, setLoading] = useState(false);
 
   let handleChange = (evt) => {
     setCity(evt.target.value);
@@ -27,7 +26,6 @@ export default function SearchBox({ updateInfo }) {
   };
 
   let getWeatherInfo = async () => {
-    setLoading(true);
     try {
       const response = await fetch(
         `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`
@@ -40,7 +38,9 @@ export default function SearchBox({ updateInfo }) {
       let jsonResponse = await response.json();
       let info = {
         city: city,
+        location: jsonResponse.name,
         temp: jsonResponse.main.temp,
+
         humidity: jsonResponse.main.humidity,
         weather: jsonResponse.weather[0].main,
         windSpeed: jsonResponse.wind.speed,
@@ -50,8 +50,6 @@ export default function SearchBox({ updateInfo }) {
     } catch (err) {
       // alert("Enter valid username!");
       throw err;
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -68,10 +66,9 @@ export default function SearchBox({ updateInfo }) {
         />
 
         <button>
-          <img src={search_icon} alt="" />
+          <img src={search_icon} alt="search" />
         </button>
       </form>
-      {loading && <div className="loader"></div>}
     </div>
   );
 }
