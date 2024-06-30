@@ -8,6 +8,7 @@ export default function SearchBox({ updateInfo }) {
 
   let [city, setCity] = useState("");
   let [error, setError] = useState(false);
+  let [loading, setLoading] = useState(false);
 
   let handleChange = (evt) => {
     setCity(evt.target.value);
@@ -26,15 +27,15 @@ export default function SearchBox({ updateInfo }) {
   };
 
   let getWeatherInfo = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`
       );
-      // if (!response.ok) {
-      //   throw new Error(
-      //     "Failed to fetch weather data. Please try again later."
-      //   );
-      // }
+
+      if (!response.ok) {
+        alert("City not found. Please enter a valid city name.");
+      }
 
       let jsonResponse = await response.json();
       let info = {
@@ -47,13 +48,16 @@ export default function SearchBox({ updateInfo }) {
       console.log(info);
       return info;
     } catch (err) {
+      // alert("Enter valid username!");
       throw err;
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="SearchBox">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
         <input
           type="text"
           name=""
@@ -67,6 +71,7 @@ export default function SearchBox({ updateInfo }) {
           <img src={search_icon} alt="" />
         </button>
       </form>
+      {loading && <div className="loader"></div>}
     </div>
   );
 }
