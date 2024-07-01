@@ -4,14 +4,7 @@ import SearchBox from "./SearchBox";
 import "./Weather.css";
 
 export default function Weather() {
-  const [weatherInfo, setWeatherInfo] = useState({
-    city: "Delhi",
-    location: "Delhi",
-    temp: 32.05,
-    humidity: 74,
-    weather: "Haze",
-    windSpeed: 3.09,
-  });
+  const [weatherInfo, setWeatherInfo] = useState({});
 
   let updateInfo = (newInfo) => {
     setWeatherInfo(newInfo);
