@@ -16,9 +16,9 @@ export default function SearchBox({ updateInfo }) {
       );
 
       if (!response.ok) {
-        throw new Error("City not found. Please enter a valid city name.");
+        alert("City not found. Please enter a valid city name.");
 
-        // alert("City not found. Please enter a valid city name.");
+        throw new Error("City not found. Please enter a valid city name.");
       }
 
       let jsonResponse = await response.json();
